@@ -12,6 +12,8 @@ fs.mkdirpSync(LOCALHOST);
 const fileList = [
   'express1',
   'hapi1',
+  'hapi-simple',
+  'function1',
   '.env',
 ];
 
