@@ -1,15 +1,39 @@
+import * as path from 'path';
 import * as Hapi from 'hapi';
+const Inert = require('inert');
 
 import { routes } from './routes';
 
 
-const server = new Hapi.Server();
+const server = new Hapi.Server({
+  connections: {
+    routes: {
+      files: {
+        relativeTo: path.join(__dirname)
+      }
+    }
+  }
+});
 server.connection({
   host: 'localhost'
 });
 
 
-server.route(routes);
+server.register([Inert], (err) => {
+  if (err) { throw err; }
+
+  server.route({
+    method: 'GET',
+    path: '/web/{param*}',
+    handler: {
+      directory: {
+        path: 'public'
+      }
+    }
+  });
+
+  server.route(routes);
+});
 
 
 export function createUri(): Promise<string> {

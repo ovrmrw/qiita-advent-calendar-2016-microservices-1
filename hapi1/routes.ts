@@ -27,7 +27,7 @@ routes.push({
     try {
       const name = req.payload && req.payload.name ? req.payload.name : req.query.name;
       const message = createHelloMessage(name);
-      reply({ message });
+      reply(message);
     } catch (error) {
       reply({ error }).code(500);
     }

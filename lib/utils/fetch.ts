@@ -14,7 +14,7 @@ export function createFetch(baseUri: string, req: AFRequest): Promise<IResponse>
   const options = {
     method: req.method,
     headers: Object.assign({
-      'Content-Type': 'application/json',
+      // 'Content-Type': 'application/json',
     }, req.headers),
     body: req.rawBody,
   };
