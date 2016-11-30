@@ -1,4 +1,5 @@
 import * as express from 'express';
+import * as path from 'path';
 
 import { routes } from './routes';
 
@@ -8,6 +9,8 @@ const app = express();
 const port = 0; // dynamic
 const host = 'localhost';
 
+
+app.use(express.static(path.join(__dirname, 'public')));
 
 app.use(routes);
 

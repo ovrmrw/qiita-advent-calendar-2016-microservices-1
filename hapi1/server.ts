@@ -9,32 +9,28 @@ const server = new Hapi.Server({
   connections: {
     routes: {
       files: {
-        relativeTo: path.join(__dirname)
-      }
+        relativeTo: path.join(__dirname, 'public')
+      },
+      response: {
+        ranges: false,
+      },
+      cors: true,
+      // isInternal: true,
     }
   }
 });
 server.connection({
-  host: 'localhost'
+  host: 'localhost',
+  port: 3000
 });
 
 
 server.register([Inert], (err) => {
   if (err) { throw err; }
-
-  server.route({
-    method: 'GET',
-    path: '/web/{param*}',
-    handler: {
-      directory: {
-        path: 'public',
-        index: true,
-      }
-    }
-  });
-
-  server.route(routes);
 });
+
+
+server.route(routes);
 
 
 export function createUri(): Promise<string> {

@@ -1,5 +1,5 @@
 import { AzureFunction } from '../types';
-import { createFetch } from '../lib/utils';
+import { createFetch, createAxios } from '../lib/utils';
 import { createUri } from './server';
 
 
@@ -7,19 +7,14 @@ export const azureFunction: AzureFunction =
   async (context, req) => {
     try {
       const uri: string = await createUri();
-      const result: any = await createFetch(uri, req).then(res => res.json());
-      console.log('result:', JSON.stringify(result, null, 2));
+      const res = await createAxios(uri, req);
+      // console.log('result:', res);
 
-      if (result.error) {
-        context.res = {
-          status: result.error.status || 404,
-          body: result,
-        }
-      } else {
-        context.res = {
-          status: 200,
-          body: result,
-        }
+      context.res = {
+        status: res.status,
+        body: res.data,
+        isRaw: true,
+        headers: res.headers,
       }
     } catch (err) {
       context.res = {
@@ -27,5 +22,5 @@ export const azureFunction: AzureFunction =
         body: err,
       }
     }
-    console.log('context.res:', JSON.stringify(context.res, null, 2));
+    // console.log('context.res:', JSON.stringify(context.res, null, 2));
   };

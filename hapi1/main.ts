@@ -16,8 +16,10 @@ export const azureFunction: AzureFunction =
       let body: any;
       let contentType: any = res.headers['content-type'] ? { 'Content-Type': res.headers['content-type'] } : {};
       let contentLength: any = res.headers['content-length'] ? { 'Content-Length': res.headers['content-length'] } : {};
-      // let acceptRanges: any = res.headers['accept-ranges'] ? { 'Accept-Ranges': res.headers['accept-ranges'] } : {};
-      // let etag = res.headers['etag'] ? { 'etag': res.headers['etag'] } : {};
+      let acceptRanges: any = res.headers['accept-ranges'] ? { 'Accept-Ranges': res.headers['accept-ranges'] } : {};
+      let etag = res.headers['etag'] ? { 'etag': res.headers['etag'] } : {};
+      let lastModified = res.headers['last-modified'] ? { 'Last-Modified': res.headers['last-modified'] } : {};
+      let date = res.headers['date'] ? { 'Date': res.headers['date'] } : {};
       console.log('res:', res.config, res.headers, res.statusText);
       // let body: any = body;
       // if (isJson(body)) {
@@ -32,12 +34,15 @@ export const azureFunction: AzureFunction =
       //   // contentType = 'text/plain';
       // }
 
+      const headers = Object.assign({}, contentType, contentLength, lastModified, acceptRanges, etag, date, { vary: 'origin' });
+      // const headers = Object.assign({}, contentType);
+      console.log('headers:', headers);
 
       context.res = {
         status,
         body: data,
         isRaw: true,
-        headers: Object.assign({}, contentType, contentLength),
+        headers,
       }
       // if (contentType) {
       //   context.res.headers = res.headers

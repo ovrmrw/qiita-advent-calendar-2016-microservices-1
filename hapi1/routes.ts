@@ -6,18 +6,18 @@ import { createWelcomeMessage, createHelloMessage } from '../repository';
 export const routes: Hapi.IRouteConfiguration[] = [];
 
 
-routes.push({
-  method: ['GET', 'POST'],
-  path: '/',
-  handler: (req, reply) => {
-    try {
-      const message = createWelcomeMessage();
-      reply({ message });
-    } catch (error) {
-      reply({ error }).code(500);
-    }
-  }
-});
+// routes.push({
+//   method: ['GET', 'POST'],
+//   path: '/',
+//   handler: (req, reply) => {
+//     try {
+//       const message = createWelcomeMessage();
+//       reply({ message });
+//     } catch (error) {
+//       reply({ error }).code(500);
+//     }
+//   }
+// });
 
 
 routes.push({
@@ -30,6 +30,21 @@ routes.push({
       reply(message);
     } catch (error) {
       reply({ error }).code(500);
+    }
+  }
+});
+
+
+routes.push({
+  method: 'GET',
+  path: '/{param*}',
+  handler: {
+    directory: {
+      path: '.',
+      index: true,
+      etagMethod: false,
+      redirectToSlash: true,
+      listing: true,
     }
   }
 });

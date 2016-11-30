@@ -30,6 +30,7 @@
   "homepage": "https://github.com/ovrmrw/multi-server-azure-functions#readme",
   "dependencies": {
     "axios": "^0.15.3",
+    "azure-function-express": "^1.0.0",
     "body-parser": "^1.15.2",
     "dotenv": "^2.0.0",
     "express": "^4.14.0",
