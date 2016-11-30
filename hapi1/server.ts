@@ -27,7 +27,8 @@ server.register([Inert], (err) => {
     path: '/web/{param*}',
     handler: {
       directory: {
-        path: 'public'
+        path: 'public',
+        index: true,
       }
     }
   });

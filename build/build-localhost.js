@@ -14,6 +14,7 @@ const fileList = [
   'hapi1',
   'hapi-simple',
   'function1',
+  'universal',
   '.env',
 ];
 

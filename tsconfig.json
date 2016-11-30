@@ -17,6 +17,6 @@
     "node_modules",
     "localhost",
     ".dest*",
-    "express1/universal"
+    "universal/src"
   ]
 }

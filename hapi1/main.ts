@@ -1,5 +1,5 @@
 import { AzureFunction } from '../types';
-import { createFetch, isJson, isHtml } from '../lib/utils';
+import { createFetch, isJson, isHtml, isPicture } from '../lib/utils';
 import { createUri } from './server';
 
 
@@ -19,6 +19,9 @@ export const azureFunction: AzureFunction =
         body = JSON.parse(text);
       } else if (isHtml(text)) {
         contentType = 'text/html';
+      } else if (isPicture(text)) {
+        contentType = 'image/png';
+        body = new Buffer(text, 'utf-8');
       } else {
         // contentType = 'text/plain';
       }
@@ -26,6 +29,7 @@ export const azureFunction: AzureFunction =
       context.res = {
         status,
         body,
+        isRaw: true,
       }
       if (contentType) {
         context.res.headers = {

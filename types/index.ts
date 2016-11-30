@@ -2,6 +2,7 @@ export interface AFResponse {
   status?: number;
   body?: any;
   headers?: any;
+  isRaw?: boolean;
 }
 
 
