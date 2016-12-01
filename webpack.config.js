@@ -14,9 +14,8 @@ module.exports = [
     target: 'node',
     entry: {
       'express1': './express1/main.ts',
-      'express2': './express2/main.ts',
       'function1': './function1/main.ts',
-      'hapi-simple1': './hapi-simple/main.ts',
+      'hapi-simple': './hapi-simple/main.ts',
       'hapi1': './hapi1/main.ts',
     },
     output: {
@@ -43,7 +42,7 @@ module.exports = [
       loaders: [
         {
           test: /\.ts$/,
-          loader: "ts-loader",
+          loader: "awesome-typescript-loader",
           exclude: /node_modules/,
         },
         {
