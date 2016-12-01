@@ -35,12 +35,19 @@ server.route([
 ]);
 
 
+let uri: string | undefined;
+
 export function createUri(): Promise<string> {
   return new Promise<string>((resolve, reject) => {
-    server.start((err) => {
-      if (err) { reject(err); }
-      console.log('Server running at:', server.info.uri);
-      resolve(server.info.uri);
-    });
+    if (uri) {
+      resolve(uri);
+    } else {
+      server.start((err) => {
+        if (err) { reject(err); }
+        uri = server.info.uri;
+        console.log('Server running at:', uri);
+        resolve(uri);
+      });
+    }
   });
 }

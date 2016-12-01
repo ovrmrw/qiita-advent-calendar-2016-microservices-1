@@ -17,12 +17,15 @@ const commands = [
   'git branch ' + DEPLOY_BRANCH,
   'git checkout ' + DEPLOY_BRANCH,
   'git rebase master',
-  "npm run tsc:azure",
+  'npm run tsc:azure',
+  'npm run webpack:prod',
+  'node build/copy-bundled-files.js',
   'git add -A',
   'git commit -m "deploy"',
   'git push origin ' + DEPLOY_BRANCH + ' -f',
   'git checkout master',
   'git branch -D ' + DEPLOY_BRANCH,
+  'node build/delete-jsmap-files.js',
 ];
 
 commands.forEach(command => {

@@ -10,7 +10,8 @@ export const routes = router;
 router.all('/', (req, res) => {
   try {
     const message = createWelcomeMessage();
-    res.json({ message });
+    res.set('Content-Type', 'text/plain');
+    res.send(message);
   } catch (error) {
     res.status(500).json({ error });
   }

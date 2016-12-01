@@ -1,5 +1,5 @@
 import { AzureFunction } from '../types';
-import { createFetch, createAxios } from '../lib/utils';
+import { customFetch } from '../lib/utils';
 import { createUri } from './server';
 
 
@@ -7,14 +7,19 @@ export const azureFunction: AzureFunction =
   async (context, req) => {
     try {
       const uri: string = await createUri();
-      const res = await createAxios(uri, req);
-      // console.log('result:', res);
-
-      context.res = {
-        status: res.status,
-        body: res.data,
-        isRaw: true,
-        headers: res.headers,
+      const res = await customFetch(uri, req);
+      
+      if (res.status === 200) {
+        context.res = {
+          status: res.status,
+          body: res.myBody,
+          headers: res.myHeaders,
+        };
+      } else { // Not Found
+        context.res = {
+          status: res.status,
+          body: res.statusText,
+        }
       }
     } catch (err) {
       context.res = {
@@ -22,5 +27,5 @@ export const azureFunction: AzureFunction =
         body: err,
       }
     }
-    // console.log('context.res:', JSON.stringify(context.res, null, 2));
+    console.log('context.res:', JSON.stringify(context.res, null, 2));
   };

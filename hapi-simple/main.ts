@@ -1,30 +1,30 @@
 import { AzureFunction } from '../types';
-import { createFetch } from '../lib/utils';
+import { customFetch } from '../lib/utils';
 import { createUri } from './server';
 
 
 export async function azureFunction(context, req) {
   try {
     const uri: string = await createUri();
-    const result: any = await createFetch(uri, req).then(res => res.json());
-    console.log('result:', JSON.stringify(result, null, 2));
+    const res = await customFetch(uri, req);
 
-    if (result.error) {
+    if (res.status === 200) {
       context.res = {
-        status: result.statusCode,
-        body: result,
-      }
-    } else {
+        status: res.status,
+        body: res.myBody,
+        headers: res.myHeaders,
+      };
+    } else { // Not Found
       context.res = {
-        status: 200,
-        body: result,
+        status: res.status,
+        body: res.statusText,
       }
     }
   } catch (err) {
     context.res = {
       status: 500,
       body: err,
-    }
+    };
   }
   console.log('context.res:', JSON.stringify(context.res, null, 2));
 }

@@ -14,8 +14,7 @@ export function createAxios(baseUri: string, req: AFRequest) {
   const options = {
     method: req.method,
     headers: req.headers,
-    data: req.rawBody,
-    
+    data: req.rawBody,    
   };
 
   console.log('\nfetch url:', url);

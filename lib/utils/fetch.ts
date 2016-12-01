@@ -3,7 +3,7 @@ import * as fetch from 'isomorphic-fetch';
 import { AFRequest } from '../../types';
 
 
-export function createFetch(baseUri: string, req: AFRequest): Promise<IResponse> {
+export async function customFetch(baseUri: string, req: AFRequest): Promise<ResponseMix> {
   const query = Object.keys(req.query).reduce((p, key) => {
     p.push(key + '=' + encodeURIComponent(req.query[key]));
     return p;
@@ -22,5 +22,25 @@ export function createFetch(baseUri: string, req: AFRequest): Promise<IResponse>
   console.log('\nfetch url:', url);
   console.log('fetch options:', options);
 
-  return fetch(url, options);
+  // return fetch(url, options);
+  return (async () => {
+    const res: IResponse = await fetch(url, options);
+    const result: ResponseMix = res;
+    let data: any;
+    const contentType = res.headers.get('content-type');
+    if (contentType.match(/json/)) {
+      data = await res.json();
+    } else {
+      data = await res.text();
+    }
+    result.myHeaders = { 'Content-Type': contentType };
+    result.myBody = data;
+    return result;
+  })();
 }
+
+
+type ResponseMix = IResponse & {
+  myBody?: any,
+  myHeaders?: { [key: string]: string }
+};

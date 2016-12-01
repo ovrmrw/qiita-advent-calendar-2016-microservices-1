@@ -15,6 +15,8 @@
     "tsc:local": "tsc --outDir localhost",
     "tsc:test": "tsc --outDir .dest-test",
     "tsc:test:w": "tsc --outDir .dest-test --watch",
+    "webpack": "webpack --progress",
+    "webpack:prod": "webpack --progress -p",
     "mocha": "mocha -r dotenv/config -r __test__/espower-enable --timeout 5000 .dest-test/__test__/**/*.js",
     "mocha:w": "mocha -r dotenv/config -r __test__/espower-enable --timeout 5000 .dest-test/__test__/**/*.js --watch"
   },
@@ -55,12 +57,18 @@
     "@types/node": "^6.0.50",
     "@types/power-assert": "^1.4.29",
     "app-root-path": "^2.0.1",
+    "awesome-typescript-loader": "^3.0.0-beta.9",
+    "babel-core": "^6.18.2",
+    "babel-loader": "^6.2.8",
+    "babel-preset-latest": "^6.16.0",
     "concurrently": "^3.1.0",
     "delete": "^0.3.2",
     "espower-loader": "^1.2.0",
     "fs-extra": "^1.0.0",
+    "json-loader": "^0.5.4",
     "mocha": "^3.1.2",
     "power-assert": "^1.4.2",
-    "typescript": "^2.1.1"
+    "typescript": "^2.1.1",
+    "webpack": "^1.13.3"
   }
 }

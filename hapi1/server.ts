@@ -11,17 +11,17 @@ const server = new Hapi.Server({
       files: {
         relativeTo: path.join(__dirname, 'public')
       },
-      response: {
-        ranges: false,
-      },
-      cors: true,
+      // response: {
+      //   ranges: false,
+      // },
+      // cors: true,
       // isInternal: true,
     }
   }
 });
 server.connection({
   host: 'localhost',
-  port: 3000
+  // port: 3000
 });
 
 
@@ -33,12 +33,19 @@ server.register([Inert], (err) => {
 server.route(routes);
 
 
+let uri: string | undefined;
+
 export function createUri(): Promise<string> {
   return new Promise<string>((resolve, reject) => {
-    server.start((err) => {
-      if (err) { reject(err); }
-      console.log('Server running at:', server.info.uri);
-      resolve(server.info.uri);
-    });
+    if (uri) {
+      resolve(uri);
+    } else {
+      server.start((err) => {
+        if (err) { reject(err); }
+        uri = server.info.uri;
+        console.log('Server running at:', uri);
+        resolve(uri);
+      });
+    }
   });
 }

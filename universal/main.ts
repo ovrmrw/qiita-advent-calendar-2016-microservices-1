@@ -1,5 +1,5 @@
 import { AzureFunction } from '../types';
-import { createFetch } from '../lib/utils';
+import { customFetch } from '../lib/utils';
 // import { createUri } from './server';
 const createUri = require('./dist/server').createUri;
 
@@ -8,7 +8,7 @@ export const azureFunction: AzureFunction =
   async (context, req) => {
     try {
       const uri: string = await createUri();
-      const result: any = await createFetch(uri, req).then(res => res.text());
+      const result: any = await customFetch(uri, req).then(res => res.text());
       console.log('result:', JSON.stringify(result, null, 2));
 
       if (result.error) {
