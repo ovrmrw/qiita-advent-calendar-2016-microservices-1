@@ -5,7 +5,7 @@ const appRoot = require('app-root-path').path;
 const TEST_DIR = '.dest-test';
 
 
-fs.removeSync(TEST_DIR);
+// fs.removeSync(TEST_DIR);
 fs.mkdirpSync(TEST_DIR);
 
 

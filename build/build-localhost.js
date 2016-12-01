@@ -5,7 +5,7 @@ const appRoot = require('app-root-path').path;
 const LOCALHOST = 'localhost';
 
 
-fs.removeSync(LOCALHOST);
+// fs.removeSync(LOCALHOST);
 fs.mkdirpSync(LOCALHOST);
 
 

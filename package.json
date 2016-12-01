@@ -5,20 +5,23 @@
   "main": "index.js",
   "scripts": {
     "prod": "npm install --only=production",
-    "pretest": "node build/build-unittest.js && npm run tsc:test",
+    "pretest": "npm run rimraf:test && node build/build-unittest.js && npm run tsc:test",
     "test": "concurrently -k \"npm run mocha:w\" \"npm run tsc:test:w\" ",
     "deploy": "node build/deploy-to-azure-functions.js",
-    "prelocal": "node build/build-localhost.js && npm run tsc:local",
+    "prelocal": "npm run rimraf:localhost && node build/build-localhost.js && npm run tsc:local",
     "local": "cd localhost && func init && func host start",
     "tsc": "tsc",
     "tsc:azure": "tsc --outDir .",
     "tsc:local": "tsc --outDir localhost",
     "tsc:test": "tsc --outDir .dest-test",
     "tsc:test:w": "tsc --outDir .dest-test --watch",
-    "webpack": "webpack --progress",
-    "webpack:prod": "webpack --progress -p",
+    "webpack": "npm run rimraf:webpack && webpack --progress",
+    "webpack:prod": "npm run rimraf:webpack && webpack --progress -p",
     "mocha": "mocha -r dotenv/config -r __test__/espower-enable --timeout 5000 .dest-test/__test__/**/*.js",
-    "mocha:w": "mocha -r dotenv/config -r __test__/espower-enable --timeout 5000 .dest-test/__test__/**/*.js --watch"
+    "mocha:w": "mocha -r dotenv/config -r __test__/espower-enable --timeout 5000 .dest-test/__test__/**/*.js --watch",
+    "rimraf:webpack": "rimraf .dest-webpack",
+    "rimraf:localhost": "rimraf localhost",
+    "rimraf:test": "rimraf .dest-test"
   },
   "repository": {
     "type": "git",
@@ -68,6 +71,7 @@
     "json-loader": "^0.5.4",
     "mocha": "^3.1.2",
     "power-assert": "^1.4.2",
+    "rimraf": "^2.5.4",
     "typescript": "^2.1.1",
     "webpack": "^2.1.0-beta.27"
   }

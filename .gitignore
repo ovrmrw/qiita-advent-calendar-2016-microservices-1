@@ -42,7 +42,7 @@ jspm_packages
 /.dest*
 /secret-key
 /data
-/secret
+/secrets
 /localhost
 
 .env
