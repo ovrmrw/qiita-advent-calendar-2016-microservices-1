@@ -13,9 +13,7 @@ export async function customFetch(baseUri: string, req: AFRequest): Promise<Resp
 
   const options = {
     method: req.method,
-    headers: Object.assign({
-      // 'Content-Type': 'application/json',
-    }, req.headers),
+    headers: req.headers,
     body: req.rawBody,
   };
 
@@ -23,20 +21,18 @@ export async function customFetch(baseUri: string, req: AFRequest): Promise<Resp
   console.log('fetch options:', options);
 
   // return fetch(url, options);
-  return (async () => {
-    const res: IResponse = await fetch(url, options);
-    const result: ResponseMix = res;
-    let data: any;
-    const contentType = res.headers.get('content-type');
-    if (contentType.match(/json/)) {
-      data = await res.json();
-    } else {
-      data = await res.text();
-    }
-    result.myHeaders = { 'Content-Type': contentType };
-    result.myBody = data;
-    return result;
-  })();
+  const response: IResponse = await fetch(url, options);
+  const result: ResponseMix = response;
+  let data: any;
+  const contentType = response.headers.get('content-type');
+  if (contentType.match(/json/)) {
+    data = await response.json();
+  } else {
+    data = await response.text();
+  }
+  result.myHeaders = { 'Content-Type': contentType };
+  result.myBody = data;
+  return result;
 }
 
 
