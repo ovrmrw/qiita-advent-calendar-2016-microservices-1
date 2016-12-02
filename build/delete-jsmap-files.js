@@ -3,11 +3,12 @@ const del = require('delete');
 const appRoot = require('app-root-path').path;
 
 
-const dirList = [  
+const dirList = [
+  'angular',  
   'express1',
   'express2',
   'function1',
-  'hapi-sample',
+  'hapi-simple',
   'hapi1',
   'lib',
   'types',

@@ -44,6 +44,7 @@ jspm_packages
 /data
 /secrets
 /localhost
+/angular/dist
 
 .env
 *.secret.json

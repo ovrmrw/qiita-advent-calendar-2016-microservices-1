@@ -10,6 +10,7 @@ fs.mkdirpSync(LOCALHOST);
 
 
 const fileList = [
+  'angular',
   'express1',
   'express2',
   'hapi1',

@@ -17,6 +17,7 @@ module.exports = [
       __filename: false,
     },
     entry: {
+      'angular': './angular/main.ts',
       'express1': './express1/main.ts',
       'function1': './function1/main.ts',
       'hapi-simple': './hapi-simple/main.ts',
@@ -61,6 +62,7 @@ module.exports = [
             presets: ['latest'],
             plugins: [],
           },
+          // exclude: [/angular\/dist/],
           // exclude: /(node_modules|bower_components)/,
           // exclude: /firebase-admin/,
         }
