@@ -1,5 +1,6 @@
 const fs = require('fs-extra');
 const path = require('path');
+const child = require('child_process');
 const appRoot = require('app-root-path').path;
 
 const LOCALHOST = 'localhost';

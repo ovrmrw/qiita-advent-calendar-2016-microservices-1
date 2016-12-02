@@ -14,7 +14,7 @@ export const azureFunction: AzureFunction =
           status: res.status,
           body: res.myBody,
           headers: res.myHeaders,
-          // isRaw: true,
+          isRaw: true,
         };
       } else { // Not Found
         context.res = {
