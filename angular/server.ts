@@ -1,18 +1,40 @@
-import * as express from 'express';
 import * as path from 'path';
-// const bodyParser = require('body-parser');
+import * as Hapi from 'hapi';
+const Inert = require('inert');
 
 
-const app = express();
+const server = new Hapi.Server({
+  connections: {
+    routes: {
+      files: {
+        relativeTo: path.join(__dirname, 'dist')
+      },
+    }
+  }
+});
+server.connection({
+  host: 'localhost',
+});
 
-const port = 0; // dynamic
-const host = 'localhost';
+
+server.register([Inert], (err) => {
+  if (err) { throw err; }
+});
 
 
-app.use('/', express.static(path.join(__dirname, 'dist')));
-
-
-// app.use(bodyParser.json());
+server.route({
+  method: 'GET',
+  path: '/{param*}',
+  handler: {
+    directory: {
+      path: '.',
+      index: true,
+      // etagMethod: false,
+      // redirectToSlash: true,
+      // listing: true,
+    }
+  }
+});
 
 
 let uri: string | undefined;
@@ -22,9 +44,9 @@ export function createUri(): Promise<string> {
     if (uri) {
       resolve(uri);
     } else {
-      const server = app.listen(port, host, (err) => {
+      server.start((err) => {
         if (err) { reject(err); }
-        uri = 'http://' + server.address().address + ':' + server.address().port;
+        uri = server.info.uri;
         console.log('Server running at:', uri);
         resolve(uri);
       });
