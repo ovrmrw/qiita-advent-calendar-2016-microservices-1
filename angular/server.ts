@@ -22,25 +22,17 @@ server.register([Inert], (err) => {
 });
 
 
-// server.route({
-//   method: 'GET',
-//   path: '/{param*}',
-//   handler: (req, reply) => {
-//     console.log('===================================', req.params['param']);
-//     reply.file(req.params['param'] || 'index.html');
-//   }
-// })
+/**
+ * req.params['param']に含まれる$を.に変換してファイルを返す。
+ * (例) hoge$bundle$js --> hoge.bundle.js
+ * Azure Functionsのrouteは.を含むと総じてNot Foundとなるためやむを得ずこうした。
+ */
 server.route({
   method: 'GET',
   path: '/{param*}',
-  handler: {
-    directory: {
-      path: '.',
-      index: true,
-      // etagMethod: false,
-      // redirectToSlash: true,
-      // listing: true,
-    }
+  handler: (req, reply) => {
+    const filename: string = (req.params['param'] || 'index.html').replace(/\$/g, '.');
+    reply.file(filename);
   }
 });
 

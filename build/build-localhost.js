@@ -7,7 +7,7 @@ const LOCALHOST = 'localhost';
 
 
 // fs.removeSync(LOCALHOST);
-fs.mkdirpSync(LOCALHOST);
+// fs.mkdirpSync(LOCALHOST);
 
 
 const fileList = [
