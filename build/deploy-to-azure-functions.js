@@ -1,3 +1,6 @@
+require('dotenv').config();
+const useWebpack = process.env.BUILD_WITH_WEBPACK === "true" ? true : false;
+
 const execSync = require('child_process').execSync;
 
 const DEPLOY_BRANCH = 'deploy-azure';
@@ -13,7 +16,7 @@ if (check) {
 }
 
 
-const commands = [
+const commandsWithWebPack = [
   'git branch ' + DEPLOY_BRANCH,
   'git checkout ' + DEPLOY_BRANCH,
   'git rebase master',
@@ -27,6 +30,21 @@ const commands = [
   'git branch -D ' + DEPLOY_BRANCH,
   'node build/delete-jsmap-files.js',
 ];
+
+const commandsWithoutWebPack = [
+  'git branch ' + DEPLOY_BRANCH,
+  'git checkout ' + DEPLOY_BRANCH,
+  'git rebase master',
+  'npm run tsc:azure',
+  'git add -A',
+  'git commit -m "deploy"',
+  'git push origin ' + DEPLOY_BRANCH + ' -f',
+  'git checkout master',
+  'git branch -D ' + DEPLOY_BRANCH,
+  'node build/delete-jsmap-files.js',
+];
+
+const commands = useWebpack ? commandsWithWebPack : commandsWithoutWebPack;
 
 commands.forEach(command => {
   console.log('='.repeat(20), command);
