@@ -22,27 +22,27 @@ server.register([Inert], (err) => {
 });
 
 
-server.route({
-  method: 'GET',
-  path: '/{param*}',
-  handler: (req, reply) => {
-    console.log('===================================', req.params['param']);
-    reply.file(req.params['param'] || 'index.html');
-  }
-})
 // server.route({
 //   method: 'GET',
 //   path: '/{param*}',
-//   handler: {
-//     directory: {
-//       path: '.',
-//       index: true,
-//       // etagMethod: false,
-//       // redirectToSlash: true,
-//       // listing: true,
-//     }
+//   handler: (req, reply) => {
+//     console.log('===================================', req.params['param']);
+//     reply.file(req.params['param'] || 'index.html');
 //   }
-// });
+// })
+server.route({
+  method: 'GET',
+  path: '/{param*}',
+  handler: {
+    directory: {
+      path: '.',
+      index: true,
+      // etagMethod: false,
+      // redirectToSlash: true,
+      // listing: true,
+    }
+  }
+});
 
 
 let uri: string | undefined;
