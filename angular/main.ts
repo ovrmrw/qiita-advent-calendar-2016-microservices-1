@@ -13,7 +13,9 @@ export const azureFunction: AzureFunction =
         context.res = {
           status: res.status,
           body: res.myBody,
-          headers: res.myHeaders,
+          headers: Object.assign(res.myHeaders, {
+            'Cache-Control': 'public',
+          }),
           // isRaw: true,
         };
       } else { // Not Found
