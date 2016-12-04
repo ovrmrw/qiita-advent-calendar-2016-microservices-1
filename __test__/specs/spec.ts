@@ -1,6 +1,6 @@
 import * as assert from 'power-assert';
 
-import { createHelloMessage, createWelcomeMessage } from '../../repository';
+import { createHelloMessage, createWelcomeMessage } from '../../lib/repository';
 
 
 describe('Unit Test', () => {

@@ -1,6 +1,6 @@
 import * as Hapi from 'hapi';
 
-import { createWelcomeMessage, createHelloMessage } from '../repository';
+import { createWelcomeMessage, createHelloMessage } from '../lib/repository';
 
 
 const APPLICATION_JSON = 'application/json';

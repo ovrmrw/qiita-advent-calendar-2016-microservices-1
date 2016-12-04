@@ -1,7 +1,7 @@
 import { Router } from 'express';
 const router = Router();
 
-import { createWelcomeMessage, createHelloMessage } from '../repository';
+import { createWelcomeMessage, createHelloMessage } from '../lib/repository';
 
 
 export const routes = router;

@@ -6,13 +6,14 @@ const appRoot = require('app-root-path').path;
 const dirList = [
   'angular',  
   'express1',
-  'express2',
+  // 'express2',
   'function1',
   'hapi-simple',
   'hapi1',
   'lib',
   'types',
   'repository',
+  'hapi-firebase-admin-qiita-advent',
 ];
 
 dirList.forEach(dir => {

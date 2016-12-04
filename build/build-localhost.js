@@ -6,19 +6,17 @@ const appRoot = require('app-root-path').path;
 const LOCALHOST = 'localhost';
 
 
-// fs.removeSync(LOCALHOST);
-// fs.mkdirpSync(LOCALHOST);
-
-
 const fileList = [
   'angular',
   'express1',
-  'express2',
+  // 'express2',
   'hapi1',
   'hapi-simple',
   'function1',
-  'universal',
+  // 'universal',
   '.env',
+  'hapi-firebase-admin-qiita-advent',
+  'secret-key',
 ];
 
 fileList.forEach(file => {
