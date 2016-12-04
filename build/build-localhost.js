@@ -15,7 +15,7 @@ const fileList = [
   'function1',
   // 'universal',
   '.env',
-  'hapi-firebase-admin-qiita-advent',
+  'hapi-qiita-advent',
   'secret-key',
   'config',
 ];

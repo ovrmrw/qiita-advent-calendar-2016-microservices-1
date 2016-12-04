@@ -18,7 +18,7 @@ module.exports = [
       'function1': './function1/main.ts',
       'hapi-simple': './hapi-simple/main.ts',
       'hapi1': './hapi1/main.ts',
-      'hapi-firebase-admin-qiita-advent': './hapi-firebase-admin-qiita-advent/main.ts',
+      'hapi-qiita-advent': './hapi-qiita-advent/main.ts',
     },
     output: {
       filename: DEST_DIR + '/[name]/main.js',

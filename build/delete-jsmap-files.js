@@ -13,7 +13,7 @@ const dirList = [
   'lib',
   'types',
   'repository',
-  'hapi-firebase-admin-qiita-advent',
+  'hapi-qiita-advent',
 ];
 
 dirList.forEach(dir => {
