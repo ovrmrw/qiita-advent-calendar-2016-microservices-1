@@ -4,7 +4,7 @@ import * as Hapi from 'hapi';
 const HapiAuthJwt = require('hapi-auth-jwt2');
 
 import { routes } from './routes';
-import { auth0ClientId, auth0ClientSecret } from '../lib/config';
+import { auth0ClientId, auth0ClientSecret } from '../config';
 
 
 const server = new Hapi.Server();

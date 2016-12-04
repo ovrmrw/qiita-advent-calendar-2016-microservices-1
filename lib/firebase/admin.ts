@@ -1,7 +1,7 @@
 import * as admin from 'firebase-admin';
 const uuid = require('uuid');
 
-import { firebaseDatabaseURL, firebaseServiceAccountKeyJson } from '../config';
+import { firebaseDatabaseURL, firebaseServiceAccountKeyJson } from '../../config';
 
 
 let firebaseApp: any;

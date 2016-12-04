@@ -1,11 +1,7 @@
 const webpack = require('webpack');
 const fs = require('fs-extra');
 
-
 const DEST_DIR = '.dest-webpack';
-
-// fs.removeSync(DEST_DIR);
-// fs.mkdirpSync(DEST_DIR);
 
 
 module.exports = [
@@ -22,6 +18,7 @@ module.exports = [
       'function1': './function1/main.ts',
       'hapi-simple': './hapi-simple/main.ts',
       'hapi1': './hapi1/main.ts',
+      'hapi-firebase-admin-qiita-advent': './hapi-firebase-admin-qiita-advent/main.ts',
     },
     output: {
       filename: DEST_DIR + '/[name]/main.js',
@@ -32,8 +29,6 @@ module.exports = [
     },
     externals: [
       {
-        '../../secret-key/app.secret.json': '../secret-key/app.secret.json',
-        '../../secret-key/serviceAccountKey.json': '../secret-key/serviceAccountKey.json',
         // 'firebase': 'firebase', // "npm i request" is needed.
         // 'firebase-admin': 'firebase-admin', // "npm i request" is needed.
         './database/database': 'firebase-admin/lib/database/database', // for firebase-admin package.
@@ -68,6 +63,6 @@ module.exports = [
         }
       ],
     },
-    devtool: 'source-map',
+    // devtool: 'source-map',
   }
 ];

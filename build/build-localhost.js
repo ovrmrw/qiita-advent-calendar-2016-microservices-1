@@ -17,6 +17,7 @@ const fileList = [
   '.env',
   'hapi-firebase-admin-qiita-advent',
   'secret-key',
+  'config',
 ];
 
 fileList.forEach(file => {

@@ -8,7 +8,7 @@
     "pretest": "npm run rimraf:test && node build/build-unittest.js && npm run tsc:test",
     "test": "concurrently -k \"npm run mocha:w\" \"npm run tsc:test:w\" ",
     "deploy": "node build/deploy-to-azure-functions.js",
-    "prelocal": "npm run rimraf:localhost && node build/build-localhost.js && npm run tsc:local",
+    "prelocal": "npm run rimraf:localhost && npm run tsc:local && node build/build-localhost.js",
     "local": "cd localhost && func init && func host start",
     "tsc": "tsc",
     "tsc:azure": "tsc --outDir .",

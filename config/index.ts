@@ -1,5 +1,9 @@
-const appSecretKeyJson = require('../../secret-key/app.secret.json');
-const firebaseServiceAccountKeyJson = require('../../secret-key/Firebase-as-a-Store-2-fddea9cd9c72.json');
+import * as fs from 'fs';
+
+// const appSecretKeyJson = require('../secret-key/app.secret.json');
+// const firebaseServiceAccountKeyJson = require('../secret-key/Firebase-as-a-Store-2-fddea9cd9c72.json');
+const appSecretKeyJson = JSON.parse(fs.readFileSync('../secret-key/app.secret.json', 'utf8'));
+const firebaseServiceAccountKeyJson = JSON.parse(fs.readFileSync('../secret-key/Firebase-as-a-Store-2-fddea9cd9c72.json', 'utf8'));
 
 
 export const auth0ClientId = appSecretKeyJson.auth0.clientId;
