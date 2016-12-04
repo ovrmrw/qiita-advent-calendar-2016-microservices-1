@@ -1,13 +1,15 @@
 import * as fs from 'fs';
 import * as path from 'path';
 
-const appSecretJsonPaht = path.join(process.cwd(), 'secret-key', 'app.secret.json');
-const firebaseServiceAccountKeyJsonPath = path.join(process.cwd(), 'secret-key', 'Firebase-as-a-Store-2-fddea9cd9c72.json');
+const SECRET_KEY = path.join(__dirname, '..', 'secret-key');
+
+const appSecretJsonPath = path.join(SECRET_KEY, 'app.secret.json');
+const firebaseServiceAccountKeyJsonPath = path.join(SECRET_KEY, 'Firebase-as-a-Store-2-fddea9cd9c72.json');
 
 
 // const appSecretKeyJson = require('../secret-key/app.secret.json');
 // const firebaseServiceAccountKeyJson = require('../secret-key/Firebase-as-a-Store-2-fddea9cd9c72.json');
-const appSecretKeyJson = JSON.parse(fs.readFileSync(appSecretJsonPaht, 'utf8'));
+const appSecretKeyJson = JSON.parse(fs.readFileSync(appSecretJsonPath, 'utf8'));
 const firebaseServiceAccountKeyJson = JSON.parse(fs.readFileSync(firebaseServiceAccountKeyJsonPath, 'utf8'));
 
 [appSecretKeyJson, firebaseServiceAccountKeyJson].forEach(json => {
